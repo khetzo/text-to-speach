@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    #text-input {
+      width: 300px;
+      height: 100px;
+      margin-bottom: 10px;
+    }
+    
+    #speak-button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <textarea id="text-input" placeholder="Enter text..."></textarea>
+  <button id="speak-button">Speak</button>
+
+  <script>
+    // Check if the browser supports the Web Speech API
+    if ('speechSynthesis' in window) {
+      const speakButton = document.getElementById('speak-button');
+      const textInput = document.getElementById('text-input');
+
+      // Function to convert text to speech
+      function convertTextToSpeech() {
+        const text = textInput.value;
+
+        // Create a new SpeechSynthesisUtterance
+        const speech = new SpeechSynthesisUtterance();
+        speech.text = text;
+
+        // Use the default voice
+        speechSynthesis.speak(speech);
+      }
+
+      // Attach event listener to the Speak button
+      speakButton.addEventListener('click', convertTextToSpeech);
+    } else {
+      // Web Speech API is not supported
+      alert('Web Speech API is not supported in this browser');
+    }
+  </script>
+</body>
+</html>
